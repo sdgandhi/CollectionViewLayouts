@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<div class="container">
+    <header class="clearfix">
+        <h1>{{ site.name }}</h1>
+    </header>
+    <div id="grid-gallery" class="grid-gallery">
+        <section class="grid-wrap container">
+            <div class="grid row">
+                {% for post in site.posts %}
+                <div class="grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <figure>
+                        <div id="repo-image-{{ forloop.index }}"></div>
+                        <figcaption>
+                            <h3 id="repo-title-{{ forloop.index  }}"></h3>
+                            <p id="repo-description-{{ forloop.index }}"></p>
+                            <p id="repo-stargazers-{{ forloop.index }}"></p>
+                        </figcaption>
+                    </figure>
+                </div>
+
+                <script>
+                    var user{{ forloop.index }} = new Gh3.User("{{ post.author }}")
+                        ,	repoTitle{{ forloop.index }} = $("#repo-title-{{ forloop.index }}")
+                            ,   repoDescription{{ forloop.index }} = $("#repo-description-{{ forloop.index }}")
+                                ,   repoStargazers{{ forloop.index }} = $("#repo-stargazers-{{ forloop.index }}")
+                                    , repoImage{{ forloop.index }} = $("#repo-image-{{ forloop.index }}")
+
+                                var layoutRepo{{ forloop.index }} = new Gh3.Repository("{{ post.layout_name }}", user{{ forloop.index }});
+
+                    layoutRepo{{ forloop.index }}.fetch(function (err, res) {
+                        if(err) {
+                            console.log("Error", err.message, res.status)
+                            throw err
+                        }
+
+                        repoImage{{ forloop.index }}.html("<a href=\"" + layoutRepo{{ forloop.index }}.html_url + "\">" + "<img src=\"{{ post.photo }}\" alt=\"img\"/>" + "</a>");
+                        repoTitle{{ forloop.index }}.html("<a href=\"" + layoutRepo{{ forloop.index }}.html_url + "\">" + layoutRepo{{ forloop.index }}.name + "</a>");
+                        //repoDescription{{ forloop.index }}.html("<a href=\"#\">" + layoutRepo{{ forloop.index }}.description + "</a>");
+                        repoDescription{{ forloop.index }}.html(layoutRepo{{ forloop.index }}.description);
+                        repoStargazers{{ forloop.index }}.html("<i class=\"fa fa-star\"></i> " + layoutRepo{{ forloop.index }}.stargazers_count);
+                    });
+                </script>
+                {% endfor %}
+            </div>
+        </section>
+    </div><!-- // grid-gallery -->
+</div>

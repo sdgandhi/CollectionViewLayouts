@@ -1,0 +1,8 @@
+---
+layout: default
+date:   2015-06-01
+photo: https://raw.githubusercontent.com/kshin/Hanabi/master/Screenshots/Example.gif
+github_url: https://github.com/kshin/Hanabi
+layout_name: Hanabi
+author: kshin
+---
