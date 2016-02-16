@@ -1,6 +1,6 @@
 name: CollectionViewLayouts
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 permalink: /:title/
 url: http://sdgandhi.github.io/CollectionViewLayouts/
 author:
